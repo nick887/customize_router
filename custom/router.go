@@ -1,7 +1,7 @@
 package custom
 
 import (
-	"customize_router/adapter"
+	"github.com/nick887/customize_router/adapter"
 	"github.com/gin-gonic/gin"
 )
 

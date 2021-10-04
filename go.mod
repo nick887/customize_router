@@ -1,4 +1,4 @@
-module github.com/Pivot-Studio/customize_router
+module github.com/nick887/customize_router
 
 go 1.17
 
