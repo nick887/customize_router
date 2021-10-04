@@ -3,6 +3,7 @@ package adapter
 import (
 	"github.com/Chronostasys/centralog/centralog"
 	"github.com/gin-gonic/gin"
+	"net/http"
 	"time"
 )
 
@@ -11,7 +12,7 @@ import (
 // @since 2.0.0
 
 // RequestHandler is a type which give the router a restriction
-type RequestHandler func(ctx *gin.Context) (status int, json interface{}, err error)
+type RequestHandler func(ctx *gin.Context,request interface{}) (status int, json interface{}, err error)
 
 // ResponseError is a unified response of error
 type ResponseError struct {
@@ -21,9 +22,22 @@ type ResponseError struct {
 }
 
 // ErrorAdapter is wrapper of handler
-func ErrorAdapter(handler RequestHandler) gin.HandlerFunc {
+func ErrorAdapter(t interface{}, handler RequestHandler) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
-		status, json, err := handler(ctx)
+		// no need validation
+		if t == nil {
+			status, json, err := handler(ctx,nil)
+			processResult(ctx, status, json, err)
+		} else {
+			// validation
+			// fail
+			if err := ctx.ShouldBind(t); err != nil {
+				processResult(ctx,http.StatusBadRequest,nil,err)
+				return
+			}
+			// success
+		}
+		status, json, err := handler(ctx,t)
 		processResult(ctx, status, json, err)
 	}
 }
@@ -47,4 +61,3 @@ func generateErrorMsg(ctx *gin.Context, err error) ResponseError {
 		RequestId: requestId.(string),
 	}
 }
-

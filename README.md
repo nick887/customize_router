@@ -4,7 +4,7 @@
 
 ## example
 
-```go  
+```go
 func main() {
     r := gin.Default()
     cr := &custom.CustmoRouter{r}
@@ -21,12 +21,12 @@ func UseContentRouter(r *custom.CustmoRouter) {
         // the second handler must be type of RequestHandler
         // handlers after the second must be type of gin.HandlerFunc
         // gin.HandlerFunc will excute first
-        hole.GETC("/hello", Hello)
+        hole.GETC("/hello",&HelloRequest{} ,Hello)
         }
     }
 }
 
-func Hello(ctx *gin.Context) (status int, json interface{}, err error) {
+func Hello(ctx *gin.Context,request interface{}) (status int, json interface{}, err error) {
     return http.StatusOK, gin.H{
     "msg": "hello",
     }, nil
