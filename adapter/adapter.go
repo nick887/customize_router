@@ -24,11 +24,8 @@ type ResponseError struct {
 // ErrorAdapter is wrapper of handler
 func ErrorAdapter(t interface{}, handler RequestHandler) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
-		// no need validation
-		if t == nil {
-			status, json, err := handler(ctx,nil)
-			processResult(ctx, status, json, err)
-		} else {
+		// need validation
+		if t != nil{
 			// validation
 			// fail
 			if err := ctx.ShouldBind(t); err != nil {
