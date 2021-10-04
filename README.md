@@ -1,6 +1,6 @@
 # Customize router
 
-## it encapsulation the gin router
+## it is a encapsulation of gin router
 
 ## use
 ```
