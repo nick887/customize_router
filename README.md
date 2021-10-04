@@ -18,6 +18,9 @@ func UseContentRouter(r *custom.CustmoRouter) {
     {
         hole := a.GroupC("/hole")
         {
+        // the second handler must be type of RequestHandler
+        // handlers after the second must be type of gin.HandlerFunc
+        // gin.HandlerFunc will excute first
         hole.GETC("/hello", Hello)
         }
     }
