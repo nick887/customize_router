@@ -6,8 +6,8 @@ import (
 )
 
 // @author Ritchie
-// @version 2.0, 2021/10/4
-// @since 2.0.0
+// @version 1.0, 2021/10/4
+// @since 1.0.0
 
 // CustmoRouter is the router we define
 type CustmoRouter struct {
