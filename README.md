@@ -51,3 +51,4 @@ func InitCustmoR(cr *custom.CustmoRouter) {
 
 ## details
 1. init centralog first
+2. custom error code must larger than 1000
